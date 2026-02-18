@@ -1,16 +1,16 @@
-import NavBar from "./NavBar"
-import { Navigate, Outlet } from "react-router-dom"
-import { useAuth } from "../context/AuthContext"
+import NavBar from './NavBar'
+import { Navigate, Outlet } from 'react-router-dom'
+import { useAuth } from '../context/customHooks'
 
 
 
-const ProtectedRoute = () => {
+export const ProtectedRoute = () => {
   
   const { isAuthenticated } = useAuth();
 
   console.log('isAuthenticated:', isAuthenticated)
   if (!isAuthenticated)
-    return <Navigate to="/sign-in" replace />;
+    return <Navigate to="/signIn" replace />;
 
   return (
     <>

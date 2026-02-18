@@ -8,3 +8,16 @@ export interface IUser {
     createdAt: Date;
     updatedAt: Date;
 };
+
+
+
+export type optionsType = {
+    [key: string]: unknown;
+};
+
+export interface IResponse<T = undefined> {
+    success: boolean;
+    message?: string;
+    data?: T;
+
+}

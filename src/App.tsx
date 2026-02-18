@@ -1,6 +1,6 @@
-import { Route, Routes } from "react-router-dom"
-import { HomePage, ProfilePage, SettingsPage, SignInPage, SignUpPage } from "./pages/index"
-import ProtectedRoute from "./components/ProtectedRoute"
+import { Route, Routes } from 'react-router-dom'
+import { HomePage, ProfilePage, SettingsPage, SignInPage, SignUpPage, NotFoundPage } from './pages/index'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
 
@@ -8,8 +8,8 @@ function App() {
   <>
 
     <Routes>
-      <Route path="/sign-in" element={<SignInPage/>} />
-      <Route path="/sign-up" element={<SignUpPage/>} />
+      <Route path="/signIn" element={<SignInPage/>} />
+      <Route path="/signUp" element={<SignUpPage/>} />
 
       <Route element={<ProtectedRoute/>}>
         <Route path="/" element={<HomePage/>} />
@@ -18,6 +18,8 @@ function App() {
       </Route>
 
       
+
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   </>
   )

@@ -1,8 +1,8 @@
  /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useState } from 'react';
+import { createContext, useState } from 'react';
 import type { IUser } from '../libs/interfaces';
 
-interface IAuthContext {
+export interface IAuthContext {
   currentUser: IUser | null;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -13,10 +13,10 @@ interface IAuthContext {
 }
 
 
-const AuthContext = createContext<IAuthContext | null>(null);
+export const AuthContext = createContext<IAuthContext | null>(null);
 
 
-function AuthProvider({ children }: { children: React.ReactNode }) {
+export default function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const [currentUser, setCurrentUser] = useState<IUser | null>(() => {
     const storedUser = localStorage.getItem('user');
@@ -81,36 +81,9 @@ function AuthProvider({ children }: { children: React.ReactNode }) {
 
 }
 
-/**
- * Custom hook to access authentication context.
- *
- * Must be used within an {@link AuthProvider}.
- *
- * @throws {Error} If used outside AuthProvider
- *
- * @returns {IAuthContext} Auth context values and actions
- * @returns {IUser | null} returns.currentUser - Currently authenticated user data or null
- * @returns {boolean} returns.isAuthenticated - Whether the user is authenticated
- * @returns {boolean} returns.isLoading - Indicates ongoing auth-related operations
- * @returns {Function} returns.setIsLoading - Updates loading state
- * @returns {Function} returns.login - Logs in the user and persists auth data
- * @returns {Function} returns.logout - Logs out the user and clears stored auth data
- * @returns {Function} returns.updateAuthData - Updates access token and/or user data
- */
-function useAuth(): IAuthContext {
-  const context = useContext(AuthContext);
-
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-
-  return context;
 
 
-}
 
-
-export { AuthProvider, useAuth };
 
 
 

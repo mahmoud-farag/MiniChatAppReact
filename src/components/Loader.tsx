@@ -1,11 +1,16 @@
 import { Loader as LoaderIcon} from 'lucide-react'
 
-const Loader = () => {
-  return (
-    <div className='flex items-center justify-center h-screen'>
-    
-        <LoaderIcon className='animate-spin size-10'/>
+interface ILoaderProps {
+    // children: React.ReactNode;
+    size?: number;
+    className?: string;
+};
 
+const Loader = ({ size = 10, className }: ILoaderProps) => {
+  return (
+    <div className={`flex items-center justify-center gap-2 ${className}`}>
+        <LoaderIcon className={`animate-spin size-${size}`}/>
+        
     </div>
   )
 }
