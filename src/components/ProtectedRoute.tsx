@@ -14,8 +14,10 @@ export const ProtectedRoute = () => {
 
   return (
     <>
-      <NavBar />
-      <Outlet/>
+      <NavBar/>
+      <div className='pt-20 px-4'>
+        <Outlet/>
+      </div>
     </>
   )
 }
