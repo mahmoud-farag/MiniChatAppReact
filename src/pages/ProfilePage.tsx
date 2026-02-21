@@ -1,7 +1,7 @@
 import { Camera, Mail, User } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../context/customHooks';
-import { userService } from '../services';
+import { s3Service, userService } from '../services';
 import toast from 'react-hot-toast';
 
 const ProfilePage = () => {
@@ -21,20 +21,22 @@ const ProfilePage = () => {
   //* refs
   const fileInputRef = useRef<HTMLInputElement>(null);
 
+  //* helper functions
 
+  const getProfileAvatar = async () => {
+    try {
+      const response = await userService.getProfileAvatar();
+      if (response?.data?.signedUrl) setAvatarUrl(response.data.signedUrl);
+    } catch (error) {
+      toast.error((error as Error)?.message || 'Failed to fetch profile avatar');
+    }
+  };
 
   //* life cycle hooks
 
   useEffect(() => {
 
-    userService.getProfileAvatar()
-      .then((res) => {
-        console.log(res);
-        if (res?.data?.signedUrl) setAvatarUrl(res.data.signedUrl);
-      })
-      .catch(error => {
-        toast.error(error?.message || 'Failed to fetch profile avatar');
-      });
+    getProfileAvatar();
 
   }, []);
 
@@ -49,7 +51,17 @@ const ProfilePage = () => {
 
       const response = await userService.getAvatarPresignedUrl({ fileName: file.name, contentType: file.type });
 
-      if (response?.data?.uploadUrl) setAvatarUrl(response.data.uploadUrl);
+      if (!response?.data?.uploadUrl) {
+        toast.error('URL not generated, can not uploading your file');
+        return;
+      }
+
+
+      await s3Service.uploadToS3({ file, url: response.data.uploadUrl });
+
+      // re-fetch the avatar after the uploading;
+      await getProfileAvatar();
+      
 
     } catch (error) {
       toast.error((error as Error)?.message || 'Failed to upload profile avatar');
@@ -59,8 +71,8 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className='flex items-center justify-center min-h-[calc(100vh-5rem)]'>
-      <div className='bg-base-300 rounded-xl p-8 w-full max-w-lg space-y-6'>
+    <div className='flex items-center justify-center min-h-[calc(100vh-10rem)]'>
+      <div className='bg-base-300 rounded-xl p-8 w-full max-w-5xl  space-y-6'>
 
         {/* Header */}
         <div className='text-center'>
