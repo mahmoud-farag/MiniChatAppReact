@@ -1,10 +1,9 @@
 import { Link } from 'react-router-dom';
-import { MessageSquare, Settings, User, LogOut, Sun, Moon } from 'lucide-react';
-import { useAuth, useTheme } from '../context/customHooks';
+import { MessageSquare, Settings, User, LogOut } from 'lucide-react';
+import { useAuth, } from '../context/customHooks';
 
 const NavBar = () => {
   const { logout } = useAuth();
-  const { toggleTheme, theme } = useTheme();
 
   return (
     <header className='bg-base-100 border-b border-base-300 fixed top-0 left-0 right-0 z-50'>
@@ -37,12 +36,6 @@ const NavBar = () => {
             <LogOut size={22} strokeWidth={2.5} />
             <span className='hidden sm:inline'>Logout</span>
           </button>
-
-          <button onClick={toggleTheme} className='btn btn-ghost btn-sm gap-2'>
-            {theme === 'light' ? <Sun size={22} strokeWidth={2.5} /> : <Moon size={22} strokeWidth={2.5} />}
-          </button>
-
-
         </nav>
       </div>
     </header>
