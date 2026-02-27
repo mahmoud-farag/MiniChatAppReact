@@ -1,5 +1,4 @@
-import { Send } from 'lucide-react';
-import { PREVIEW_MESSAGES, THEMES } from '../constants';
+import { THEMES } from '../constants';
 import { useTheme } from '../context/customHooks';
 import Preview from '../components/Preview';
 
