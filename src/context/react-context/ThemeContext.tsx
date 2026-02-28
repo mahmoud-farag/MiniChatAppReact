@@ -1,11 +1,12 @@
 import { createContext, useEffect, useState } from 'react';
+import type { THEMES } from '../../constants';
 
 
-type ThemeType = 'light' | 'dark';
+type ThemeType = typeof THEMES[number];
 
 export interface IThemeContext {
     theme: ThemeType;
-    toggleTheme: () => void;
+    updateTheme: (theme: ThemeType) => void;
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -38,12 +39,12 @@ export default function ThemeProvider ({ children }: IProps) {
     }, [theme]);
 
 
-    const toggleTheme = () => {
-        return setTheme((prev) => prev === 'dark' ? 'light' : 'dark');
+    const updateTheme = (theme: ThemeType) => {
+        return setTheme(() => theme );
     }
 
 
-    return <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    return <ThemeContext.Provider value={{ theme, updateTheme }}>
         {children}
     </ThemeContext.Provider>
 };

@@ -1,6 +1,6 @@
-import Axios, { AxiosError,} from 'axios';
+import Axios, { AxiosError, } from 'axios';
 
-import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig} from 'axios';
+import type { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 import { BASE_URL } from './apiConfig';
 
 class AxiosClient {
@@ -28,7 +28,7 @@ class AxiosClient {
     localStorage.removeItem('user');
 
     // Using window.location ensures a full page reload, clearing any stale React state
-    window.location.href = '/login';
+    window.location.href = '/signIn';
   }
 
   private setupInterceptors(): void {

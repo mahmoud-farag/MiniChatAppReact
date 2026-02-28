@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Loader from '../components/Loader';
 import toast from 'react-hot-toast';
 import { authService } from '../services';
-import { useAuth } from '../context/customHooks';
+import { useAuth } from '../context/react-context/customHooks';
 
 interface IFormData {
   email: string;

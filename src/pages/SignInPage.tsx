@@ -1,7 +1,7 @@
 import { Lock, Mail, MessageSquare } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthRightSide from '../components/AuthRightSide';
-import { useAuth } from '../context/customHooks';
+import { useAuth } from '../context/react-context/customHooks';
 import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { authService } from '../services';
@@ -51,7 +51,6 @@ const SignInPage = () => {
 
       const isValid = validateForm();
     
-      console.log('isValid:', isValid);
       if (!isValid) return;
 
       setIsLogging(true);
