@@ -1,6 +1,6 @@
 import { Camera, Mail, User } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
-import { useAuth } from '../context/customHooks';
+import { useAuth } from '../context/react-context/customHooks';
 import { s3Service, userService } from '../services';
 import toast from 'react-hot-toast';
 

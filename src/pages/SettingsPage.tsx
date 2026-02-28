@@ -1,5 +1,5 @@
 import { THEMES } from '../constants';
-import { useTheme } from '../context/customHooks';
+import { useTheme } from '../context/react-context/customHooks';
 import Preview from '../components/Preview';
 
 

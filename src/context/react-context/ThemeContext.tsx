@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { THEMES } from '../constants';
+import type { THEMES } from '../../constants';
 
 
 type ThemeType = typeof THEMES[number];

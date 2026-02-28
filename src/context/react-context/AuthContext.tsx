@@ -1,6 +1,7 @@
  /* eslint-disable react-refresh/only-export-components */
 import { createContext, useState } from 'react';
-import type { IUser } from '../libs/interfaces';
+import type { IUser } from '../../libs/interfaces';
+import useRealTimeStore from '../zustand/useRealTimeStore';
 
 export interface IAuthContext {
   currentUser: IUser | null;
@@ -40,6 +41,9 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
 
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('user', JSON.stringify(userData));
+    
+    // connect to socket
+    useRealTimeStore.getState().connect(true);
   };
 
   const logout = (): void => {
@@ -48,6 +52,9 @@ export default function AuthProvider({ children }: { children: React.ReactNode }
 
     localStorage.removeItem('accessToken');
     localStorage.removeItem('user');
+
+    //disconnect from socket
+    useRealTimeStore.getState().disconnect();
   };
 
 

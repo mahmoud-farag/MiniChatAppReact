@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { MessageSquare, Settings, User, LogOut } from 'lucide-react';
-import { useAuth, } from '../context/customHooks';
+import { useAuth, } from '../context/react-context/customHooks';
 
 const NavBar = () => {
   const { logout } = useAuth();
